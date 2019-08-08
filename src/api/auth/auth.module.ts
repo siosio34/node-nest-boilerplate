@@ -12,7 +12,7 @@ import { AuthController } from './auth.controller';
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => {
         return {
-          secret: configService.get('jwt.jwt_secret_key'),
+          secret: configService.get('jwt.secret_key'),
           signOptions: { expiresIn: configService.get('jwt.expiresIn') },
         };
       },
