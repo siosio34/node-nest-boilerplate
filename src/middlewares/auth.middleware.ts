@@ -1,19 +1,13 @@
-import {
-  Module,
-  NestModule,
-  MiddlewareConsumer,
-  NestMiddleware,
-  Injectable,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { Request, Response } from 'express';
-import { InvalidationTokenException } from './exception';
+import { NestMiddleware, Injectable } from '@nestjs/common';
+import { AuthService } from '../api/auth/auth.service';
+import { Request, Response, NextFunction } from 'express';
+import { InvalidationTokenException } from '../api/auth/exception';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   constructor(private readonly authService: AuthService) {}
 
-  async use(req: Request, res: Response, next: Function) {
+  async use(req: Request, res: Response, next: NextFunction) {
     const isAuthURL =
       req.baseUrl.includes('login') || req.baseUrl.includes('register');
 

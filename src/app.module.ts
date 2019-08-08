@@ -11,7 +11,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { UserModule } from './api/user/user.module';
 import { TodoModule } from './api/todo/todo.module';
 
-import { AuthMiddleware } from './api/auth/auth.middleware';
+import { AuthMiddleware } from './middlewares/auth.middleware';
 
 import * as path from 'path';
 
