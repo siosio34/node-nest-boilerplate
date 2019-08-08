@@ -15,8 +15,11 @@ export class ValidationPipe implements PipeTransform<any> {
     }
     const object = plainToClass(metatype, value);
     const errors = await validate(object);
+
     if (errors.length > 0) {
-      throw new BadRequestException('형식에 맞지않는 요청입니다.');
+      throw new BadRequestException(
+        errors[0].constraints[Object.keys(errors[0].constraints)[0]],
+      );
     }
     return value;
   }

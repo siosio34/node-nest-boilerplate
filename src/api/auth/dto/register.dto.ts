@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class RegisterDto {
   @IsString()
@@ -8,5 +8,6 @@ export class RegisterDto {
   public readonly password: string;
 
   @IsString()
+  @IsNotEmpty({ message: '비어있으면 다메다메' })
   public readonly name: string;
 }

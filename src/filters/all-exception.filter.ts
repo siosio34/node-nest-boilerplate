@@ -4,7 +4,9 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
+  BadRequestException,
 } from '@nestjs/common';
+import { ValidationError } from 'class-validator';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -21,12 +23,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException
         ? exception.message
-        : '알 수 없는 오류가 발생하였습니다.';
+        : '알 수 없는 오류가 발생했습니다.';
 
     // 여기서 센트리 로깅해야된다능
 
     response.status(status).json({
-      statusCode: status,
       message,
       timestamp: new Date().toISOString(),
       path: request.url,
