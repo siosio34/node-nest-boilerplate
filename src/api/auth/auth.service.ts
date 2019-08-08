@@ -56,8 +56,10 @@ export class AuthService {
     newUser.name = name;
     newUser.password = hashedPassword;
 
-    // TODO user 생성 안되었을때호출.
     const savedUser = await this.userService.create(newUser);
+
+    // TODO user 생성 안되었을때호출.
+    // 500이 호출되긴하는데 그냥 회원가입 실패로 돌릴가도 생각중.
     const accessToken = this.jwtService.sign({ email: savedUser.email });
 
     return {
